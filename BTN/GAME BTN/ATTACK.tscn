@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://rrekn5p17qe"]
+
+[ext_resource type="Texture2D" uid="uid://dee73io822f2h" path="res://BTN/GAME BTN/asset/icon_weapon.png" id="1_ryg2y"]
+
+[node name="Attack" type="CanvasLayer"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(920, 384)
+scale = Vector2(12.125, 12.125)
+texture_normal = ExtResource("1_ryg2y")
+action = "Attack"

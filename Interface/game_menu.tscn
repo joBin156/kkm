@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://debbfr77knh37"]
+
+[ext_resource type="VideoStream" path="res://Interface/asset/backroand.ogv" id="1_j3xxr"]
+[ext_resource type="Texture2D" uid="uid://bly48f8syyh0l" path="res://Interface/asset/image.png" id="1_kkko5"]
+[ext_resource type="Script" path="res://Interface/code/game_menu.gd" id="1_uboo6"]
+[ext_resource type="FontFile" uid="uid://bl6xcquh7p1jx" path="res://Interface/asset/Early GameBoy.ttf" id="2_ure4j"]
+
+[sub_resource type="Animation" id="Animation_vpt8t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Btn/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ybiu3"]
+resource_name = "button"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Btn/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0pycd"]
+_data = {
+"RESET": SubResource("Animation_vpt8t"),
+"button": SubResource("Animation_ybiu3")
+}
+
+[node name="Game Menu" type="Control" node_paths=PackedStringArray("anim")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uboo6")
+anim = NodePath("Btn2")
+autoplay = true
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -63.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.225, 1.225)
+stream = ExtResource("1_j3xxr")
+autoplay = true
+loop = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.497
+anchor_top = 0.431
+anchor_right = 0.497
+anchor_bottom = 0.431
+offset_left = -289.544
+offset_top = -301.298
+offset_right = 1758.46
+offset_bottom = 1746.7
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.295, 0.295)
+texture = ExtResource("1_kkko5")
+
+[node name="Btn2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0pycd")
+}
+autoplay = "button"
+
+[node name="Btn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 480.0
+offset_right = 840.0
+offset_bottom = 584.0
+
+[node name="Label" type="Label" parent="Btn"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+layout_mode = 0
+offset_left = 78.0
+offset_top = -1.0
+offset_right = 416.0
+offset_bottom = 35.0
+theme_override_fonts/font = ExtResource("2_ure4j")
+theme_override_font_sizes/font_size = 26
+text = "PRESS TO START
+"
+
+[connection signal="pressed" from="Btn" to="." method="_on_btn_pressed"]
